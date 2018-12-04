@@ -218,9 +218,15 @@ public class BaseNotificationBanner: UIView {
      */
     
     private func updateSpacerViewHeight(make: ConstraintMaker? = nil) {
-        let finalHeight = NotificationBannerUtilities.isNotchFeaturedIPhone()
-            && UIApplication.shared.statusBarOrientation.isPortrait
-            && (parentViewController?.navigationController?.isNavigationBarHidden ?? true) ? 40.0 : 10.0
+        var finalHeight = 0
+        if bannerPosition == .top {
+            finalHeight = NotificationBannerUtilities.isNotchFeaturedIPhone()
+                && UIApplication.shared.statusBarOrientation.isPortrait
+                && (parentViewController?.navigationController?.isNavigationBarHidden ?? true) ? 40.0 : 10.0
+        } else {
+            finalHeight = 10
+        }
+        
         if let make = make {
             make.height.equalTo(finalHeight)
         } else {
